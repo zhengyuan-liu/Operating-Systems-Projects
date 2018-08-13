@@ -1,4 +1,4 @@
-# Project 2ARaces and Synchronization
+# Project 2A - Races and Synchronization
 ## INTRODUCTION:
 In this project, you will engage (at a low level) with a range of synchronization problems. Part A of the project (this part!) deals with conflicting read-modify-write operations on single variables and complex data structures (an ordered linked list). It is broken up into multiple steps:
 
@@ -13,4 +13,5 @@ In this project, you will engage (at a low level) with a range of synchronizatio
 	* Recognize and demonstrate the race conditions when performing linked list operations, and address them with different synchronization mechanisms.
 	* Do performance instrumentation and measurement.
 	* Analyze and explain the observed performance.
+
 Viewed from a skills (rather than problem domain) perspective, this project focuses less on programming, and more on performance measurement and analysis.
