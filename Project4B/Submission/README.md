@@ -10,10 +10,8 @@
 * README: the README file containing a description of the included files.
 * smoke_test.sh
 
-
 ## Some Notes
 * Based on the spec "... the computation associated with each operation is so small that you may find it much simpler to use a single thread (and polling or non-blocking I/O) to avoid hanging on standard input for commands that only rarely arrive." Therefore, I used a single thread to interact with the sensors and process the commands (using poll). The unit of the sleep time is one second, and every one second the main thread check the poll fd, if there are some commands then process the command, and if not, either go to sleep or report the temperature.
-
 
 ## References:
 * BeagleBone Tutorial: WiFi, SSH and SFTP
