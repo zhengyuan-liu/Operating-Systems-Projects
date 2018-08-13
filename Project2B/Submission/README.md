@@ -49,7 +49,8 @@ As shown in the profile.out, routine `list_operation_spin_lock` consumes most of
 
 When there are a large number of threads, these thread contend for one exclusive resource, so the majority of these threads have to spend a lot of time on the spinning waiting, which costs a huge number of cycles.
 
-QUESTION 2.3.3 - Mutex Wait Time:
+### QUESTION 2.3.3 - Mutex Wait Time:
+
 Look at the average time per operation (vs. # threads) and the average wait-for-mutex time (vs. #threads).
 * Why does the average lock-wait time rise so dramatically with the number of contending threads?
 * Why does the completion time per operation rise (less dramatically) with the number of contending threads?
