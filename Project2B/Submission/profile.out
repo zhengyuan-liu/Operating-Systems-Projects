@@ -1,0 +1,105 @@
+Total: 13007 samples
+   11946  91.8%  91.8%    13003 100.0% list_operation_spin_lock
+     580   4.5%  96.3%      580   4.5% SortedList_length
+     398   3.1%  99.4%      431   3.3% SortedList_lookup
+      68   0.5%  99.9%       68   0.5% __strcmp_sse42
+      10   0.1% 100.0%       45   0.3% SortedList_insert
+       4   0.0% 100.0%        4   0.0% _init
+       1   0.0% 100.0%        1   0.0% SortedList_delete
+       0   0.0% 100.0%    13003 100.0% __clone
+       0   0.0% 100.0%    13003 100.0% start_thread
+       0   0.0% 100.0%    13003 100.0% thread_routine
+ROUTINE ====================== list_operation_spin_lock in /u/cs/grad/zhengyua/bin/lab2_list.c
+ 11946  13003 Total samples (flat / cumulative)
+     .      .  110:             exit(2);
+     .      .  111:         }
+     .      .  112:     }
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void list_operation_spin_lock(SortedListElement_t **elements) {
+     .      .  116:     int i;
+     .      .  117:     for (i = 0; i < n_iterations; i++) {
+     .      .  118:         SortedListElement_t *element = elements[i];
+  3819   3819  119:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .     45  120:         SortedList_insert(list, element);
+     .      .  121:         __sync_lock_release(&spin_lock);
+     .      .  122:     }
+     .      .  123:     for (i = 0; i < n_iterations; i++) {
+  3564   3564  124:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .    580  125:         int length = SortedList_length(list);
+     .      .  126:         __sync_lock_release(&spin_lock);
+     .      .  127:         if (length == -1) {  // get length fails
+     .      .  128:             fprintf(stderr, "Error: get length operation fails, the list is corrupted.\n");
+     .      .  129:             exit(2);
+     .      .  130:         }
+     .      .  131:     }
+     .      .  132:     for (i = 0; i < n_iterations; i++) {
+     .      .  133:         SortedListElement_t *oldelem = elements[i];
+  4563   4563  134:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .    431  135:         SortedListElement_t *elem = SortedList_lookup(list, oldelem->key);
+     .      .  136:         if (elem == NULL) {  // lookup fails
+     .      .  137:             fprintf(stderr, "Error: lookup operation fails, the list is corrupted.\n");
+     .      .  138:             exit(2);
+     .      .  139:         }
+     .      1  140:         int rc = SortedList_delete(elem);
+     .      .  141:         __sync_lock_release(&spin_lock);
+     .      .  142:         if (rc == -1) {  // delete fails
+     .      .  143:             fprintf(stderr, "Error: delete fails, the list is corrupted.\n");
+     .      .  144:             exit(2);
+     .      .  145:         }
+     .      .  146:     }
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void * thread_routine(void * elements) {
+     .      .  150:     switch(opt_sync) {
+     .      .  151:         case 0:
+     .      .  152:             list_operation((SortedListElement_t **)elements);
+ROUTINE ====================== list_operation_spin_lock in /u/cs/grad/zhengyua/bin/lab2_list.c
+ 11946  13003 Total samples (flat / cumulative)
+     .      .  110:             exit(2);
+     .      .  111:         }
+     .      .  112:     }
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void list_operation_spin_lock(SortedListElement_t **elements) {
+     .      .  116:     int i;
+     .      .  117:     for (i = 0; i < n_iterations; i++) {
+     .      .  118:         SortedListElement_t *element = elements[i];
+  3819   3819  119:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .     45  120:         SortedList_insert(list, element);
+     .      .  121:         __sync_lock_release(&spin_lock);
+     .      .  122:     }
+     .      .  123:     for (i = 0; i < n_iterations; i++) {
+  3564   3564  124:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .    580  125:         int length = SortedList_length(list);
+     .      .  126:         __sync_lock_release(&spin_lock);
+     .      .  127:         if (length == -1) {  // get length fails
+     .      .  128:             fprintf(stderr, "Error: get length operation fails, the list is corrupted.\n");
+     .      .  129:             exit(2);
+     .      .  130:         }
+     .      .  131:     }
+     .      .  132:     for (i = 0; i < n_iterations; i++) {
+     .      .  133:         SortedListElement_t *oldelem = elements[i];
+  4563   4563  134:         while (__sync_lock_test_and_set(&spin_lock, 1) == 1) ; // spin-wait
+     .    431  135:         SortedListElement_t *elem = SortedList_lookup(list, oldelem->key);
+     .      .  136:         if (elem == NULL) {  // lookup fails
+     .      .  137:             fprintf(stderr, "Error: lookup operation fails, the list is corrupted.\n");
+     .      .  138:             exit(2);
+     .      .  139:         }
+     .      1  140:         int rc = SortedList_delete(elem);
+     .      .  141:         __sync_lock_release(&spin_lock);
+     .      .  142:         if (rc == -1) {  // delete fails
+     .      .  143:             fprintf(stderr, "Error: delete fails, the list is corrupted.\n");
+     .      .  144:             exit(2);
+     .      .  145:         }
+     .      .  146:     }
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void * thread_routine(void * elements) {
+     .      .  150:     switch(opt_sync) {
+     .      .  151:         case 0:
+     .      .  152:             list_operation((SortedListElement_t **)elements);

@@ -1,0 +1,5 @@
+# Project 4B Sensors Input
+## INTRODUCTION:
+One of the things that makes small, low-power-consumption systems interesting is ability they give us to create software that interacts with people in the physical world. The input side of those interactions is via a variety of local sensors (e.g., for sound, light, temperature, position, motion, pressure). The output side can be sensory (e.g., sound, lights, low power displays) or physical (e.g. mechanical actuators), or (through digital and analog outputs) any other controllable device. Building interactive personal appliances requires us to be able to communicate with the types of sensors, indicators and actuators that can be connected to such systems. Such devices have become increasingly popular and common in recent years.
+
+In this project we will create applications that run in an embedded system, read data from external sensors, and log the results. Real world devices of this kind are commonly networked. We'll take that step in Project 4C. For now, the device you build will be stand-alone.
