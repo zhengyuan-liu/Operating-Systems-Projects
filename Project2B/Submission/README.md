@@ -29,7 +29,7 @@ EMAIL: zhengyuanliu@ucla.edu
 
 
 ## Answers to Questions
-QUESTION 2.3.1 - Cycles in the basic list implementation:
+### QUESTION 2.3.1 - Cycles in the basic list implementation:
 * Where do you believe most of the cycles are spent in the 1 and 2-thread list tests?
 * Why do you believe these to be the most expensive parts of the code?
 * Where do you believe most of the time/cycles are being spent in the high-thread spin-lock tests?
@@ -41,7 +41,7 @@ In the high-thread spin-lock tests, most of the time/cycles are being spent on t
 
 In the high-thread mutex tests, most of the time/cycles are being spent on the list operations (because for waiting of the mutex lock, threads that cannot get the lock are blocked and yield CPU, which does not consuming any cycles).
 
-QUESTION 2.3.2 - Execution Profiling:
+### QUESTION 2.3.2 - Execution Profiling:
 * Where (what lines of code) are consuming most of the cycles when the spin-lock version of the list exerciser is run with a large number of threads?
 * Why does this operation become so expensive with large numbers of threads?
 
@@ -62,7 +62,7 @@ Because the completion time per operation is just recording the elapsed time for
 
 Because wait time per operation is the sum of waiting time of all the threads (for example at one moment there is 10 threads waiting for the lock, and the overall wait-time will add all these 10 threads' time spending on waiting); the completion time per operation is just recording the elapsed time for the whole process, and if there are multiply threads waiting, the time counted are actually the waiting time of the next thread which is going to acquire the lock.
 
-QUESTION 2.3.4 - Performance of Partitioned Lists
+### QUESTION 2.3.4 - Performance of Partitioned Lists
 * Explain the change in performance of the synchronized methods as a function of the number of lists.
 * Should the throughput continue increasing as the number of lists is further increased? If not, explain why not.
 * It seems reasonable to suggest the throughput of an N-way partitioned list should be equivalent to the throughput of a single list with fewer (1/N) threads. Does this appear to be true in the above curves? If not, explain why not.
