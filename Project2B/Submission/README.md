@@ -36,34 +36,40 @@ QUESTION 2.3.1 - Cycles in the basic list implementation:
 * Where do you believe most of the time/cycles are being spent in the high-thread mutex tests?
 
 In the 1 and 2-thread list tests, I believe most of the cycles  are spent in the operations of the list. Because since there are very few threads (only 1 and 2), there are very little cycles spending on acquiring or waiting for the lock and most of cycles are spenting on the list operations.
+
 In the high-thread spin-lock tests, most of the time/cycles are being spent on the spinning waiting for the spin-lock.
+
 In the high-thread mutex tests, most of the time/cycles are being spent on the list operations (because for waiting of the mutex lock, threads that cannot get the lock are blocked and yield CPU, which does not consuming any cycles).
 
 QUESTION 2.3.2 - Execution Profiling:
 * Where (what lines of code) are consuming most of the cycles when the spin-lock version of the list exerciser is run with a large number of threads?
 * Why does this operation become so expensive with large numbers of threads?
-As shown in the profile.out, routine `list_operation_spin_lock` consumes most of the cycles (90%+), and inside the routine, statement `while (__sync_lock_test_and_set(&spin_lock, 1) == 1)` consumes most of the cycles. 
-When there are a large number of threads, these thread contend for one exclusive resource, so the majority of these threads have to spend a lot of time on the spinning waiting, which costs a huge number of cycles.
 
+As shown in the profile.out, routine `list_operation_spin_lock` consumes most of the cycles (90%+), and inside the routine, statement `while (__sync_lock_test_and_set(&spin_lock, 1) == 1)` consumes most of the cycles. 
+
+When there are a large number of threads, these thread contend for one exclusive resource, so the majority of these threads have to spend a lot of time on the spinning waiting, which costs a huge number of cycles.
 
 QUESTION 2.3.3 - Mutex Wait Time:
 Look at the average time per operation (vs. # threads) and the average wait-for-mutex time (vs. #threads).
-	* Why does the average lock-wait time rise so dramatically with the number of contending threads?
-	* Why does the completion time per operation rise (less dramatically) with the number of contending threads?
-	* How is it possible for the wait time per operation to go up faster (or higher) than the completion time per operation?
+* Why does the average lock-wait time rise so dramatically with the number of contending threads?
+* Why does the completion time per operation rise (less dramatically) with the number of contending threads?
+* How is it possible for the wait time per operation to go up faster (or higher) than the completion time per operation?
 
 Since there is only one thread can acquire the lock, the rest of threads have to wait for the lock. As the number of contending threads increase, average lock-wait time dramatically rises since there are an increasing number of threads waiting, and all these threads' waiting time are summed into the overall wait-time.
+
 Because the completion time per operation is just recording the elapsed time for the whole process, although there are multiply threads waiting for one lock, there always exists one thread which acquires the lock and does the operation. 
+
 Because wait time per operation is the sum of waiting time of all the threads (for example at one moment there is 10 threads waiting for the lock, and the overall wait-time will add all these 10 threads' time spending on waiting); the completion time per operation is just recording the elapsed time for the whole process, and if there are multiply threads waiting, the time counted are actually the waiting time of the next thread which is going to acquire the lock.
 
-
 QUESTION 2.3.4 - Performance of Partitioned Lists
-	* Explain the change in performance of the synchronized methods as a function of the number of lists.
-	* Should the throughput continue increasing as the number of lists is further increased? If not, explain why not.
-	* It seems reasonable to suggest the throughput of an N-way partitioned list should be equivalent to the throughput of a single list with fewer (1/N) threads. Does this appear to be true in the above curves? If not, explain why not.
+* Explain the change in performance of the synchronized methods as a function of the number of lists.
+* Should the throughput continue increasing as the number of lists is further increased? If not, explain why not.
+* It seems reasonable to suggest the throughput of an N-way partitioned list should be equivalent to the throughput of a single list with fewer (1/N) threads. Does this appear to be true in the above curves? If not, explain why not.
 
 As shown in the figures, as the number of lists increases, the performance (throughput) of the synchronized methods also increases no matter what the number of threads is. The reason is as the number of lists increases, the locks become more fine-grained, which reduces the probability/degree of contentions for locks. Also, the fine-grained locks are better for the parallel execution on multiply processors.
+
 The throughput will not continue increasing as the number of lists is further increased. Because as the number of lists further increases, the operation of inserting and deleting element tends to be constant (since little contention on locks), but the get-length operations will need more locks, which will downgrade the throughput.
+
 This appears to be true in the above curves that the throughput of an N-way partitioned list seems to be equivalent to the throughput of a single list with fewer (1/N) threads. This is reasonable because since the fine-grained locks and a good hash-function will make the operation on an N-way partitioned list just like a single list with fewer (1/N) threads.
 
 
