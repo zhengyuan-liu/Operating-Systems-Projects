@@ -1,8 +1,9 @@
+# README
 NAME: Zhengyuan Liu
+
 EMAIL: zhengyuanliu@ucla.edu
 
-
-Included Files:
+## Included Files:
 * lab0.c: the C source code that that copies its standard input to its standard output by read(2)-ing from file descriptor 0 (until encountering an end of file) and write(2)-ing to file descriptor 1 and implements other requirements of Project 0.
 * Makefile: the Makefile to build the program and the tarball as the requirement of Project 0.
 * backtrace.png: screen snapshot from a gdb session showing a segfault and associated stack-trace
@@ -10,8 +11,7 @@ Included Files:
 * README: the README file
 
 
-Smoke-test Cases:
-
+## Smoke-test Cases:
 * Case 1: copy successful, and the program exits with 0. Create input file, run the command below, and test whether the program exits with 0.
 	./lab0 --input in.txt --output out.txt
 
@@ -31,15 +31,15 @@ Smoke-test Cases:
 	./lab0 --segfault --catch
 
 
-Some Notes:
+## Some Notes:
 * Use @ before commands (e.g. @echo): do not print the command to CLI
 * Use &> /dev/null: redirect all the output of this command to /dev/null, and do not print to CLI
 * Use rm -f option: ignore files to delete that do not exist
 
-References:
+## References:
 * Project 0 description, http://web.cs.ucla.edu/classes/spring18/cs111/projects/P0.html
 * Linux man pages, https://linux.die.net/man/
 * getopt() and getopt_long() - CSDN Blog, https://blog.csdn.net/cashey1991/article/details/7942809
 * [Linux] Detailed description for signal() - CSDN Blog, https://blog.csdn.net/yockie/article/details/51729774
 * GNU Make, https://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_toc.html
-* Lab 1A Discussion Slide, https://ccle.ucla.edu/pluginfile.php/2303515/mod_resource/content/0/Project%200.pdf
+* Lab 1A Discussion Slide
