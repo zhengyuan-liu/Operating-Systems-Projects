@@ -24,17 +24,17 @@ Write a program (called lab4c_tcp) that:
   * --host=name or address
   * --log=filename
   * port number
-    Note that there is no --port= in front of the port number. This is a non-switch parameter.
+    Note that there is no `--port=` in front of the port number. This is a non-switch parameter.
 * accepts the same commands and generates the same reports as the previous Beaglebone project, but now the input and output are from/to a network connection to a server.
-open a TCP connection to the server at the specified address and port
-immediately send (and log) an ID terminated with a newline:
+ 1. open a TCP connection to the server at the specified address and port
+ 2. immediately send (and log) an ID terminated with a newline:
 ID=ID-number 
 This new report enables the server to keep track of which devices it has received reports from.
-as before, send (and log) newline terminated temperature reports over the connection
-as before, process (and log) newline-terminated commands received over the connection
+ 3. as before, send (and log) newline terminated temperature reports over the connection
+ 4. as before, process (and log) newline-terminated commands received over the connection
 If your temperature reports are mis-formatted, the server will return a LOG command with a description of the error.
 Having logged these commands will help you find and fix any problems with your reports.
-as before, the last command sent by the server will be an OFF.
+ 5. as before, the last command sent by the server will be an OFF.
 Unlike the previous project, the button will not be used as an alternative manual shutdown mechanism.
 Do not accept commands from standard input, or send received commands or generated reports to standard output.
 
