@@ -1,6 +1,6 @@
 # README
 
-## Included files;
+## Included files:
 * lab3a.c: the C source module for lab3a
 * ext2_fs.h: the slightly simplified version of the Linux header file that defines the format of the EXT2 file system.
 * Makefile: a Makefile to build and run the deliverable program. The higher level targets are:
