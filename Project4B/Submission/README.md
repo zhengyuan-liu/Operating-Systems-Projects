@@ -1,9 +1,6 @@
-NAME: Zhengyuan Liu
-EMAIL: zhengyuanliu@ucla.edu
+# README
 
-README
-
-Included Files:
+## Included Files:
 * lab4b.c: C source files for an embedded application that builds and runs (with no errors or warnings) on an embedded system
 * Makefile: build and test the application. The higher level targets include:
 	* default ... build my program (compiling with the -Wall and -Wextra options).
@@ -14,12 +11,11 @@ Included Files:
 * smoke_test.sh
 
 
-Some Notes
-* Because of Piazza post 381 (https://piazza.com/class/jdabtkwr46f7mn?cid=381), I log all the commands including invalid commands to the logfile, and I think it is reasonable because logfile should record all the input including error inputs.
+## Some Notes
 * Based on the spec "... the computation associated with each operation is so small that you may find it much simpler to use a single thread (and polling or non-blocking I/O) to avoid hanging on standard input for commands that only rarely arrive." Therefore, I used a single thread to interact with the sensors and process the commands (using poll). The unit of the sleep time is one second, and every one second the main thread check the poll fd, if there are some commands then process the command, and if not, either go to sleep or report the temperature.
 
 
-References:
+## References:
 * BeagleBone Tutorial: WiFi, SSH and SFTP
 * BeagleBone Tutorial: GPIO, Interrupt, Analog and PWM
 * mraa: libmraa - Low Level Skeleton Library for Communication on GNU/Linux platforms, https://iotdk.intel.com/docs/master/mraa/
