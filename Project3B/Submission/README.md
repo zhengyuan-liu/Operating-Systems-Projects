@@ -1,5 +1,5 @@
-NAME: Xiao Yang,Zhengyuan Liu
-EMAIL: avadayang@icloud.com,zhengyuanliu@ucla.edu
+NAME: Zhengyuan Liu
+EMAIL: zhengyuanliu@ucla.edu
 
 
 included files;

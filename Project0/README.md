@@ -24,12 +24,13 @@ If you encounter an unrecognized argument you should print out an error message 
 
 To ensure that operations are performed in the right order when multiple arguments are specified, it is suggested that you
 
-first process all arguments and store the results in variables
-then check which options were specified and carry actions out in the correct order:
-do any file redirection
-register the signal handler
-cause the segfault
-if no segfault was caused, copy stdin to stdout
+* first process all arguments and store the results in variables
+* then check which options were specified and carry actions out in the correct order:
+1. do any file redirection
+2. register the signal handler
+3. cause the segfault
+4. if no segfault was caused, copy stdin to stdout
+
 It is relatively easy to generate primitive error messages with perror(3), but if you study the documentation you will see how to get access to the underlying error descriptions, which you could then use with fprintf(stderr,... to generate better formatted error messages to the correct file descriptor.
 
 Note that to use the advanced debugging features of gdb(1) you will need to compile your program with the -g option, which adds debugging symbol table information to your program.
