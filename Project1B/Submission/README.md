@@ -1,20 +1,19 @@
+# README
 NAME: Zhengyuan Liu
+
 EMAIL: zhengyuanliu@ucla.edu
 
-
-Included Files:
+## Included Files:
 * lab1b-client.c: the C source code of the client.
 * lab1b-server.c: the C source code of the server.
 * Makefile: the Makefile to build the program and the tarball.
 * README: the README file describing each of the included files and any other information
 
-
-Some Notes
+## Some Notes
 * It is tricky that for the zlib-compressed char array, it is not '\0' terminated (because actually it is byte array rather that char array), so that we cannot use strlen() to get the length of zlib-compressed char array and it would lose length. Therefore I write a function my_strlen() to get the really length for the zlib-compressed char array.
 
-
-References:
-* Lab 1A Week 3 Slide, https://ccle.ucla.edu/pluginfile.php/2323863/mod_resource/content/0/Week%203%20-%20Short%20.pdf
+## References:
+* Lab 1A Week 3 Slide
 * Sockets Tutorial, http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html
 * socket(2) - Linux man page, https://linux.die.net/man/2/socket
 * connect(2) - Linux man page, https://linux.die.net/man/2/connect
