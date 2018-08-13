@@ -1,6 +1,6 @@
 # README
 
-## Included Files;
+## Included Files:
 * lab3b.py: the Python source module for lab3b
 * Makefile: a Makefile to build and run the deliverable program. The higher level targets are:
 	* default ... produce an executable named lab3b by creating an script to interpret lab3b.py
