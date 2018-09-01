@@ -29,4 +29,4 @@ Beaglebone Bring-Up
 Sensors Input
 
 ## Project 4C
-Internet Of Things Security
+Internet of Things Security
