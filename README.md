@@ -26,7 +26,7 @@ File System Consistency Analysis
 Beaglebone Bring-Up
 
 ## Project 4B
-Sensors Input
+Embedded System Sensors Input
 
 ## Project 4C
-Internet of Things Security
+Internet of Things Secure communication
